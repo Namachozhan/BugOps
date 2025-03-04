@@ -1,11 +1,10 @@
 **SonarQube Docker Troubleshooting Guide** 
 1. Check If the Container is Running   
-   docker ps 
-2.If SonarQube is not listed, it’s not running. 
-  Start it: 
-    docker start <container_id>
- 
-3.Restart if needed: 
+docker ps 
+If SonarQube is not listed, it’s not running. 
+Start it: 
+docker start <container_id> 
+Restart if needed: 
 docker restart <container_id>
 
 ---
@@ -16,13 +15,13 @@ docker inspect <container_id> | grep -i '"HostPort"'
 Ensures that port 9000 is mapped correctly.
  
 If incorrect, stop and remove the container:
-************************************************
+
  
 docker stop <container_id>
 docker rm <container_id>
  
 Run SonarQube with correct port mapping:
-**********************************************
+
  
 docker run -d --name sonarqube -p 9000:9000 sonarqube
 
@@ -33,7 +32,6 @@ docker run -d --name sonarqube -p 9000:9000 sonarqube
 ss -tulnp | grep 9000
  
 Expected output:
-******************
  
 LISTEN   0   128   0.0.0.0:9000   0.0.0.0:*
  
