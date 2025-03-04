@@ -2,7 +2,7 @@
 1. Check If the Container is Running `docker ps`
 2. If SonarQube is not listed, it’s not running. 
 Start it: 
-docker start <container_id> 
+```docker start <container_id> 
 3. Restart if needed: 
 docker restart <container_id> 
 
