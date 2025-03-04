@@ -1,5 +1,5 @@
 **SonarQube Docker Troubleshooting Guide** 
-1. Check If the Container is Running docker ps
+1. Check If the Container is Running `docker ps`
 2. If SonarQube is not listed, it’s not running. 
 Start it: 
 docker start <container_id> 
