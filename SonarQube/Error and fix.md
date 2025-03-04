@@ -1,14 +1,14 @@
 **SonarQube Docker Troubleshooting Guide** 
-1. Check If the Container is Running 
-docker ps 
-If SonarQube is not listed, it’s not running. 
-Start it: 
-docker start <container_id>
+1. Check If the Container is Running   
+   docker ps 
+2.If SonarQube is not listed, it’s not running. 
+  Start it: 
+    docker start <container_id>
  
-Restart if needed:
- 
+3.Restart if needed: 
 docker restart <container_id>
 
+---
 **2. Verify Port Mapping**
  
 docker inspect <container_id> | grep -i '"HostPort"'
@@ -16,19 +16,24 @@ docker inspect <container_id> | grep -i '"HostPort"'
 Ensures that port 9000 is mapped correctly.
  
 If incorrect, stop and remove the container:
+************************************************
  
 docker stop <container_id>
 docker rm <container_id>
  
 Run SonarQube with correct port mapping:
+**********************************************
  
 docker run -d --name sonarqube -p 9000:9000 sonarqube
+
+---
 
 **3. Check If SonarQube is Listening on Port 9000**
  
 ss -tulnp | grep 9000
  
 Expected output:
+******************
  
 LISTEN   0   128   0.0.0.0:9000   0.0.0.0:*
  
@@ -55,9 +60,7 @@ sudo ufw reload
  
 1. Go to Azure Portal → Your VM → Networking.
  
- 
-2. Ensure an Inbound Rule exists allowing TCP traffic on port 9000.
- 
+2. Ensure an Inbound Rule exists allowing TCP traffic on port 9000. 
  
 3. If missing, create a rule:
  
