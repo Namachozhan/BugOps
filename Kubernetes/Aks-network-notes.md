@@ -63,7 +63,4 @@ resource "azurerm_kubernetes_cluster" "aks" {
 
 ---
 
-**These notes provide a structured reference for AKS networking concepts, configurations, and best practices.**
-
-Would you like to extend this document with more AKS-related topics?
 
