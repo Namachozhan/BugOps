@@ -149,16 +149,34 @@ az keyvault show --name <KEYVAULT_NAME>
 az keyvault secret list --vault-name <KEYVAULT_NAME>
 ```
 
-### **Issue: Unable to locate executable file pwsh**
-**Fix:** Explicitly set script type as PowerShell in pipeline YAML.
-```yaml
-- task: PowerShell@2
-  inputs:
-    targetType: 'inline'
-    script: |
-      echo "Username: $(vm-username)"
-      echo "Password: $(vm-password)"
-```
+### **Error: `Unable to locate executable file pwsh`**
+- **Fix**: Ensure PowerShell Core is installed, or explicitly specify Windows PowerShell in the pipeline:
+  ```yaml
+  - task: PowerShell@2
+    inputs:
+      targetType: 'inline'
+      script: 'Write-Output "Using Windows PowerShell"'
+      pwsh: false
+  ```
+
+### **Error: `AzureKeyVault@1 task failed to retrieve secrets`**
+- **Fix**: Ensure the **Managed Identity** or **Service Principal** has **Key Vault Secret User** permissions.
+  ```sh
+  az keyvault set-policy --name MyKeyVault --spn <appId> --secret-permissions get list
+  ```
+
+
+- **Fix**: Ensure that the **Managed Identity** is assigned to the VM:
+  ```sh
+  az vm identity assign --name MyVM --resource-group MyResourceGroup
+  ```
+
+---
+
+## Notes
+- Managed Identity is preferred for security since it eliminates the need to store credentials.
+- Ensure the self-hosted agent has the necessary permissions in Azure DevOps.
+- When using a Service Principal, store credentials securely in Azure DevOps secrets.
 
 ---
 
